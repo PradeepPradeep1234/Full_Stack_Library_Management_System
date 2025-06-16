@@ -1,5 +1,5 @@
 # Library Management System
-
+   🔗 **Live Demo**: [Click here to try the app](https://full-stack-library-management-system.onrender.com)
 ## Overview
 
 The Library Management System is a web-based application built using Python and Flask. It provides functionality for managing books, users, and borrowing/returning operations in a library. The system includes role-based access control, allowing administrators to manage books and track history, while regular users can borrow and return books. The application ensures secure user authentication and integrates with a MySQL database for data storage.
