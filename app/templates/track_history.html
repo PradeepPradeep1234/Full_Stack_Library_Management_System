@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Track History</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container my-5">
+{% if history %}
+  <h2 class="mb-4">Customer History</h2>
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>User</th>
+        <th>Book</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Action</th>
+        <th>DateTime</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in history %}
+      <tr>
+        <td>{{ row.username }}</td>
+        <td>{{ row.book_name }}</td>
+        <td>{{ row.author_name }}</td>
+        <td>{{ row.genre }}</td>
+        <td>{{ row.action.capitalize() }}</td>
+        <td>{{ row.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+    <form action="{{ url_for('admin.clear_track_history') }}" method="POST"
+          onsubmit="return confirm('Are you sure you want to clear all track history? This action cannot be undone.');"
+          class="d-inline">
+      <button type="submit" class="btn btn-danger mt-3">Clear Track History</button>
+    </form>
+
+  <a href="{{ url_for('admin.admin_dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+{% else %}
+  <div class="alert alert-info text-center p-4 rounded shadow-sm">
+    <h4 class="mb-2">📭 No Track History Available</h4>
+    <p class="mb-0">All borrowing and returning actions by users will appear here.</p>
+    <a href="{{ url_for('admin.admin_dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+  </div>
+{% endif %}
+</div>
+</body>
+</html>

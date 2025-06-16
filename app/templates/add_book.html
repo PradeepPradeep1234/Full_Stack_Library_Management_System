@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Add Books</title>
+  <!-- Bootstrap CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="mb-4">Add a New Book</h2>
+    <form method="POST" action="/add_books">
+      <div class="mb-3">
+        <label for="b_id" class="form-label">Book ID</label>
+        <input type="text" class="form-control" id="b_id" name="b_id" placeholder="Enter Book ID" required />
+      </div>
+      <div class="mb-3">
+        <label for="b_name" class="form-label">Book Name</label>
+        <input type="text" class="form-control" id="b_name" name="b_name" placeholder="Enter Book Name" required />
+      </div>
+      <div class="mb-3">
+        <label for="a_name" class="form-label">Author Name</label>
+        <input type="text" class="form-control" id="a_name" name="a_name" placeholder="Enter Author Name" required />
+      </div>
+      <div class="mb-3">
+        <label for="b_genre" class="form-label">Book Genre</label>
+        <input type="text" class="form-control" id="b_genre" name="b_genre" placeholder="Enter Book Genre" required />
+      </div>
+      <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-select" id="status" name="status" required>
+          <option value="" selected disabled>Select status</option>
+          <option value="Available">Available</option>
+          <option value="Checked Out">Checked Out</option>
+          <option value="Not Available">Not Available</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Book</button>
+    </form>
+  </div>
+  <div class="text-center mt-3">
+    <a href="{{ url_for('admin.admin_dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

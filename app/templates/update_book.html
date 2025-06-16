@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Add Books</title>
+  <!-- Bootstrap CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="container mt-5">
+    <h2 class="mb-4">Update Book Details</h2>
+    <form method="POST" action="{{ url_for('admin.update_books', id=data.id) }}">
+
+      <div class="mb-3">
+        <label for="b_id" class="form-label">Book ID</label>
+        <input type="text" class="form-control" id="b_id" name="b_id" value={{ data.Book_id}} required />
+      </div>
+      <div class="mb-3">
+        <label for="b_name" class="form-label">Book Name</label>
+        <input type="text" class="form-control" id="b_name" name="b_name" value={{ data.Book_Name }} required />
+      </div>
+      <div class="mb-3">
+        <label for="a_name" class="form-label">Author Name</label>
+        <input type="text" class="form-control" id="a_name" name="a_name" value= {{ data.Author_Name }} required />
+      </div>
+      <div class="mb-3">
+        <label for="b_genre" class="form-label">Book Genre</label>
+        <input type="text" class="form-control" id="b_genre" name="b_genre" value={{ data.Genre_type }} required />
+      </div>
+      <div class="mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-select" id="status" name="status" required>
+          <option value="" selected disabled>Select status</option>
+          <option value="Available">Available</option>
+          <option value="Checked Out">Checked Out</option>
+          <option value="Not Available">Not Available</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Update Book</button>
+    </form>
+  </div>
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

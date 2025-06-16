@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>View Books</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+<div class="container my-4">
+    {% if current_user.is_authenticated and current_user.Role == 'user' %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded shadow-sm mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Library Management System</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                    aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+                <span class="navbar-text me-3">Welcome, {{ current_user.Username }}</span>
+                <a href="{{ url_for('user.logout') }}" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+    </nav>
+    {% endif %}
+
+    <h1 class="mb-4 text-center text-md-start">Books List</h1>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Book Name</th>
+                    <th>Author Name</th>
+                    <th>Status</th>
+                    <th>Book ID</th>
+                    <th>Genre</th>
+                    {% if current_user.is_authenticated and current_user.Role == 'user' %}
+                    <th>Actions</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+            {% for val in data %}
+                <tr>
+                    <td>{{ val.Book_Name }}</td>
+                    <td>{{ val.Author_Name }}</td>
+                    <td>{{ val.Status }}</td>
+                    <td>{{ val.Book_id }}</td>
+                    <td>{{ val.Genre_type }}</td>
+                    {% if current_user.is_authenticated and current_user.Role == 'user' %}
+                    <td>
+                        <div class="d-flex flex-wrap gap-2">
+                            <a href="{{ url_for('user.borrow_book', book_id=val.id) }}" class="btn btn-sm btn-success">Borrow</a>
+                            <a href="{{ url_for('user.return_book', book_id=val.id) }}" class="btn btn-sm btn-warning">Return</a>
+                        </div>
+                    </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% if current_user.is_authenticated and current_user.Role == 'admin' %}
+    <div class="text-center mt-4">
+        <a href="{{ url_for('admin.admin_dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+    {% endif %}
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="container mt-3">
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show text-center" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+
+<!-- Bootstrap JS Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

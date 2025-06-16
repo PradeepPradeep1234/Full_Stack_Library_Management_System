@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <!-- Bootstrap 5 CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+  <div class="card shadow p-4" style="width: 100%; max-width: 400px;">
+    <h2 class="text-center mb-4">Login</h2>
+    <form method="POST">
+      {{ data.hidden_tag() }}
+
+      <div class="mb-3">
+        {{ data.username.label(class="form-label") }}
+        {{ data.username(class="form-control") }}
+      </div>
+
+      <div class="mb-3">
+        {{ data.password.label(class="form-label") }}
+        {{ data.password(class="form-control") }}
+      </div>
+
+      <div class="d-grid">
+        {{ data.submit(class="btn btn-primary") }}
+      </div>
+    </form>
+
+    <div class="text-center mt-3">
+      <a href="{{ url_for('user.register_page') }}">Don't have an account? Register</a>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="mb-3">
+          {% for category, message in messages %}
+            <div class="alert alert-{{ 'warning' if category == 'warning' else 'danger' if category == 'danger' else 'success' }} alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  <!-- Bootstrap JS (for dismissible alerts) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
