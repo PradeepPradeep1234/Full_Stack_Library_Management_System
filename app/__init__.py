@@ -31,7 +31,9 @@ def create_app():
     app.register_blueprint(user_bp)
     app.register_blueprint(admin_bp)
 
-    with app.app_context():
-        db.create_all()
+    # ❌ No db.create_all() in production
+    if os.environ.get("FLASK_ENV") == "development":
+        with app.app_context():
+            db.create_all()
 
     return app
